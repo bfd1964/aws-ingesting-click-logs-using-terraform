@@ -1,7 +1,7 @@
 
 resource "aws_kinesis_firehose_delivery_stream" "click_logger_firehose_delivery_stream" {
   name = "${var.app_prefix}-firehose-delivery-stream"
-  depends_on = ["aws_s3_bucket.click_logger_firehose_delivery_s3_bucket"]
+  depends_on = [aws_s3_bucket.click_logger_firehose_delivery_s3_bucket]
   
   destination = "extended_s3"
   

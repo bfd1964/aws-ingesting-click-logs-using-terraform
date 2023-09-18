@@ -75,7 +75,7 @@ resource "aws_lambda_permission" "apigw_lambda" {
   # The /*/*/* part allows invocation from any stage, method and resource path
   # within API Gateway REST API.
   source_arn = "${aws_api_gateway_rest_api.click_logger_api.execution_arn}/*/*/*"
-  depends_on = ["aws_lambda_function.lambda_clicklogger","aws_api_gateway_rest_api.click_logger_api"]
+  depends_on = [aws_lambda_function.lambda_clicklogger,aws_api_gateway_rest_api.click_logger_api]
 }
 
 

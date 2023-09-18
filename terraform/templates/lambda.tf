@@ -9,7 +9,7 @@ resource "aws_lambda_function" "lambda_clicklogger" {
   timeout       = 300
   
   source_code_hash = "${filebase64sha256(var.lambda_source_zip_path)}"
-  depends_on = ["aws_iam_role.click_logger_lambda_role", "aws_kinesis_firehose_delivery_stream.click_logger_firehose_delivery_stream"]
+  depends_on = [aws_iam_role.click_logger_lambda_role, aws_kinesis_firehose_delivery_stream.click_logger_firehose_delivery_stream]
 
   environment {
     variables = {
@@ -29,7 +29,7 @@ resource "aws_lambda_function" "lambda_clicklogger_stream_consumer" {
   timeout       = 300
   
   source_code_hash = "${filebase64sha256(var.lambda_source_zip_path)}"
-  depends_on = ["aws_iam_role.click_logger_lambda_role", "aws_dynamodb_table.click-logger-table"]
+  depends_on = [aws_iam_role.click_logger_lambda_role, aws_dynamodb_table.click-logger-table]
 
   environment {
     variables = {
@@ -49,7 +49,7 @@ resource "aws_lambda_function" "lambda_clicklogger_authorizer" {
   timeout       = 300
   
   source_code_hash = "${filebase64sha256(var.lambda_source_zip_path)}"
-  depends_on = ["aws_iam_role.click_logger_lambda_role"]
+  depends_on = [aws_iam_role.click_logger_lambda_role]
 
   environment {
     variables = {

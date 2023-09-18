@@ -3,13 +3,13 @@
 resource "aws_cloudwatch_log_group" "lambda_click_logger_log_group" {
   name              = "/aws/lambda/${var.app_prefix}/${aws_lambda_function.lambda_clicklogger.function_name}"
   retention_in_days = 3
-  depends_on = ["aws_lambda_function.lambda_clicklogger"]
+  depends_on = [aws_lambda_function.lambda_clicklogger]
 }
 
 resource "aws_cloudwatch_log_group" "lambda_click_logger_authorizer_log_group" {
   name              = "/aws/lambda/${var.app_prefix}/${aws_lambda_function.lambda_clicklogger_authorizer.function_name}"
   retention_in_days = 3
-  depends_on = ["aws_lambda_function.lambda_clicklogger_authorizer"]
+  depends_on = [aws_lambda_function.lambda_clicklogger_authorizer]
 }
 
 resource "aws_cloudwatch_log_group" "click_logger_firehose_delivery_stream_log_group" {

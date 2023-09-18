@@ -6,7 +6,7 @@ resource "aws_glue_catalog_database" "aws_glue_click_logger_database" {
 resource "aws_glue_catalog_table" "aws_glue_click_logger_catalog_table" {
   name          = "${var.app_prefix}table"
   database_name = "${var.app_prefix}database"
-  depends_on    = ["aws_glue_catalog_database.aws_glue_click_logger_database", "aws_s3_bucket.click_logger_firehose_delivery_s3_bucket"]
+  depends_on    = [aws_glue_catalog_database.aws_glue_click_logger_database, aws_s3_bucket.click_logger_firehose_delivery_s3_bucket]
 
   table_type = "EXTERNAL_TABLE"
 

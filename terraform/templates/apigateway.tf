@@ -10,7 +10,7 @@ resource "aws_api_gateway_resource" "resource" {
   path_part   = "clicklogger"
   parent_id   = "${aws_api_gateway_rest_api.click_logger_api.root_resource_id}"
   rest_api_id = "${aws_api_gateway_rest_api.click_logger_api.id}"
-  depends_on = ["aws_api_gateway_rest_api.click_logger_api"]
+  depends_on = [aws_api_gateway_rest_api.click_logger_api]
 }
 
 resource "aws_api_gateway_account" "click_logger_api_gateway_account" {
@@ -98,11 +98,11 @@ resource "aws_api_gateway_method" "method" {
   http_method   = "POST"
   authorization = "CUSTOM"
   authorizer_id = "${aws_api_gateway_authorizer.clicklogger-authorizer.id}"
-  depends_on = ["aws_api_gateway_rest_api.click_logger_api","aws_api_gateway_resource.resource", 
-                  "aws_api_gateway_authorizer.clicklogger-authorizer"
+  depends_on = [aws_api_gateway_rest_api.click_logger_api,aws_api_gateway_resource.resource, 
+                  aws_api_gateway_authorizer.clicklogger-authorizer
                   ,
-                   "aws_api_gateway_model.clicklogger_model",
-                   "aws_api_gateway_request_validator.clicklogger_validator"
+                   aws_api_gateway_model.clicklogger_model,
+                   aws_api_gateway_request_validator.clicklogger_validator
                   ]
   request_models = {
     "application/json" = "${aws_api_gateway_model.clicklogger_model.name}"
@@ -120,8 +120,8 @@ resource "aws_api_gateway_integration" "integration" {
   http_method             = "${aws_api_gateway_method.method.http_method}"
   integration_http_method = "POST"
   uri                     = "${aws_lambda_function.lambda_clicklogger.invoke_arn}"
-  depends_on = ["aws_api_gateway_rest_api.click_logger_api","aws_api_gateway_resource.resource",
-                "aws_api_gateway_method.method"]
+  depends_on = [aws_api_gateway_rest_api.click_logger_api,aws_api_gateway_resource.resource,
+                aws_api_gateway_method.method]
   }
   
 
@@ -139,8 +139,8 @@ resource "aws_api_gateway_method_response" "response_200" {
   response_models = {
          "application/json" = "Empty"
     }
-  depends_on = ["aws_api_gateway_resource.resource","aws_api_gateway_rest_api.click_logger_api",
-                "aws_api_gateway_method.method"]
+  depends_on = [aws_api_gateway_resource.resource,aws_api_gateway_rest_api.click_logger_api,
+                aws_api_gateway_method.method]
 }
 
 
@@ -155,9 +155,9 @@ resource "aws_api_gateway_integration_response" "MyDemoIntegrationResponse" {
     "method.response.header.Access-Control-Allow-Methods" = "'*'"
   }
    
-  depends_on = ["aws_api_gateway_resource.resource","aws_api_gateway_rest_api.click_logger_api",
-                 "aws_api_gateway_method_response.response_200","aws_api_gateway_method.method",
-                 "aws_api_gateway_integration.integration"]
+  depends_on = [aws_api_gateway_resource.resource,aws_api_gateway_rest_api.click_logger_api,
+                 aws_api_gateway_method_response.response_200,aws_api_gateway_method.method,
+                 aws_api_gateway_integration.integration]
 }
 
 resource "aws_api_gateway_deployment" "clicklogger_deployment" {
@@ -165,7 +165,7 @@ resource "aws_api_gateway_deployment" "clicklogger_deployment" {
   rest_api_id = "${aws_api_gateway_rest_api.click_logger_api.id}"
   stage_name  = "${var.stage_name}"
 
-  depends_on = ["aws_api_gateway_integration.integration"]
+  depends_on = [aws_api_gateway_integration.integration]
 }
 
 output "deployment-url" {
