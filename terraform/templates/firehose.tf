@@ -8,8 +8,8 @@ resource "aws_kinesis_firehose_delivery_stream" "click_logger_firehose_delivery_
   extended_s3_configuration {
     role_arn           = "${aws_iam_role.click_logger_stream_consumer_firehose_role.arn}"
     bucket_arn         = "${aws_s3_bucket.click_logger_firehose_delivery_s3_bucket.arn}"
-    buffer_size        = 64
-    buffer_interval    = 60
+#    buffer_size        = 64
+#    buffer_interval    = 60
     cloudwatch_logging_options {
       enabled = true
       log_group_name = "/aws/kinesis_firehose_delivery_stream/click_logger_firehose_delivery_stream"
