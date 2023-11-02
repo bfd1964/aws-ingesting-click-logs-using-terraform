@@ -27,7 +27,7 @@ resource "aws_iam_policy" "click_loggerlambda_logging_policy" {
         "dynamodb:Scan",
         "dynamodb:Query"
       ],
-      "Resource": "${aws_dynamodb_table.click-logger-table.arn}",
+      "Resource": "${aws_dynamodb_table.click_logger_table.arn}",
       "Effect": "Allow"
     },
     {

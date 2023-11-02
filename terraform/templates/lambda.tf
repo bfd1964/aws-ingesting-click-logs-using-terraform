@@ -29,11 +29,11 @@ resource "aws_lambda_function" "lambda_clicklogger_stream_consumer" {
   timeout       = 300
   
   source_code_hash = "${filebase64sha256(var.lambda_source_zip_path)}"
-  depends_on = [aws_iam_role.click_logger_lambda_role, aws_dynamodb_table.click-logger-table]
+  depends_on = [aws_iam_role.click_logger_lambda_role, aws_dynamodb_table.click_logger_table]
 
   environment {
     variables = {
-      DB_TABLE = "${aws_dynamodb_table.click-logger-table.name}"
+      DB_TABLE = "${aws_dynamodb_table.click_logger_table.name}"
       #REGION = "${data.aws_region.current.name}"
     }
   }
