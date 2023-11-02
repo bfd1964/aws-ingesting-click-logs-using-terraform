@@ -1,5 +1,5 @@
 # contextid, callerid, type (page/app), component (page_header/login_popup), action (click/collapse) createdtime
-resource "aws_dynamodb_table" "click-logger-table" {
+resource "aws_dynamodb_table" "click_logger_table" {
   name              = "${var.app_prefix}table"
   billing_mode      = "PROVISIONED"
   read_capacity     = 5
