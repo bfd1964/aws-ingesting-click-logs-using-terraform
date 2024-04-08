@@ -24,6 +24,10 @@ jobs:
           key: cache-{{ checksum "/tmp/CIRCLECI_CACHE_KEY" }}
           paths:
             - ~/.m2/repository
+      - run:
+          shell: /bin/bash
+          command: cd ~/project/terraform/templates
+          command: make tm
   deploy:
     # This is an example deploy job, not actually used by the workflow
     docker:
