@@ -57,6 +57,8 @@ workflows:
     jobs:
       - java-build
       - threat-model
+        requires:
+          - java-build
 #      - deploy:
 #         requires:
 #          - threat-model
