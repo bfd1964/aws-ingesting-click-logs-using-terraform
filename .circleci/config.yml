@@ -56,9 +56,7 @@ workflows:
   cicd:
     jobs:
       - java-build
-      - threat-model:
-        requires:
-          - java-build
+      - threat-model
 #      - deploy:
 #         requires:
 #          - threat-model
