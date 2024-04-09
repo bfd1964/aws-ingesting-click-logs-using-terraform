@@ -2,7 +2,7 @@
 # Stacks detected: deps:java:source/clicklogger
 version: 2.1
 jobs:
-  infrastructure-build:
+  java-build:
     docker:
       - image: cimg/openjdk:17.0
     working_directory: ~/project/source/clicklogger
@@ -24,10 +24,25 @@ jobs:
           key: cache-{{ checksum "/tmp/CIRCLECI_CACHE_KEY" }}
           paths:
             - ~/.m2/repository
+  threat-model:
+    docker:
+      - image: cimg/base:stable
+    steps:
       - run:
-          name: Build Terraform
+          name: Terraform Init
+          command: '# terraform init'
+      - run:
+          name: Terraform Plan Generation
+          command: '# terraform plan -out tfplan'
+      - run:
+          name: Terraform Plan Show
+          command: '# terraform show -json tfplan > tfplan.json'
+      - run:
+          name: Terraform Graph file
+          command: '# terraform show -json tfplan > tfplan.json'
       - run:
           name: Update Threat Model
+          command: '# '
   deploy:
     # This is an example deploy job, not actually used by the workflow
     docker:
@@ -35,12 +50,15 @@ jobs:
     steps:
       # Replace this with steps to deploy to users
       - run:
-          name: deploy
-          command: '#e.g. ./deploy.sh'
+          name: Build or Update Infrastructure
+          command: '# terraform apply tfplan --auto-approve'
 workflows:
-  build-and-test:
+  cicd:
     jobs:
-      - infrastructure-build
-    # - deploy:
-    #     requires:
-    #       - test-java
+      - java-build
+      - threat-model
+        requires:
+          - java-build
+      - deploy:
+         requires:
+          - threat-model
