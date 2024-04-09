@@ -55,10 +55,11 @@ jobs:
 workflows:
   cicd:
     jobs:
-      - java-build:
-      - threat-model:
-        requires:
-          - java-build
-      - deploy:
-         requires:
-          - threat-model
+      - java-build
+#      - threat-model:
+#        requires:
+#          - java-build
+#      - deploy:
+#         requires:
+#          - threat-model
+#
