@@ -2,7 +2,7 @@
 # Stacks detected: deps:java:source/clicklogger
 version: 2.1
 jobs:
-  test-java:
+  Infrastructure-Build:
     docker:
       - image: cimg/openjdk:17.0
     working_directory: ~/project/source/clicklogger
@@ -25,9 +25,9 @@ jobs:
           paths:
             - ~/.m2/repository
       - run:
-          name: Build Threat Model
-          shell: /bin/bash
-          command: cd ~/project/terraform/templates | pwd | ls -l | make tm
+          name: Build Terraform
+      - run:
+          name: Update Threat Model
   deploy:
     # This is an example deploy job, not actually used by the workflow
     docker:
@@ -40,7 +40,7 @@ jobs:
 workflows:
   build-and-test:
     jobs:
-      - test-java
+      - Infrastructure-Build
     # - deploy:
     #     requires:
     #       - test-java
