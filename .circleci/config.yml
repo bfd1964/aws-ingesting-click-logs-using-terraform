@@ -2,7 +2,7 @@
 # Stacks detected: deps:java:source/clicklogger
 version: 2.1
 jobs:
-  java-build:
+  build:
     docker:
       - image: cimg/openjdk:17.0
     working_directory: ~/project/source/clicklogger
@@ -24,7 +24,7 @@ jobs:
           key: cache-{{ checksum "/tmp/CIRCLECI_CACHE_KEY" }}
           paths:
             - ~/.m2/repository
-  threat-model:
+  model:
     docker:
       - image: cimg/base:stable
     steps:
@@ -55,10 +55,10 @@ jobs:
 workflows:
   cicd:
     jobs:
-      - java-build
-      - threat-model
+      - build
+      - model:
         requires:
-          - java-build
+          - build
 #      - deploy:
 #         requires:
 #          - threat-model
