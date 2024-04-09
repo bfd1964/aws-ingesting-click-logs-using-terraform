@@ -53,13 +53,16 @@ jobs:
           name: Build or Update Infrastructure
           command: '# terraform apply tfplan --auto-approve'
 workflows:
-  cicd:
+  build_and_test:
     jobs:
       - build
       - model:
-        requires:
-          - build
+          requires:
+            - build
+#      - hold:
+#          type: approval
+#          requires:
 #      - deploy:
-#         requires:
-#          - threat-model
-#
+#            - build
+#          requires:
+#            - hold
