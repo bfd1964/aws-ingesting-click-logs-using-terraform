@@ -1,6 +1,5 @@
 # This config was automatically generated from your source code
 # Stacks detected: deps:java:source/clicklogger
-#
 version: 2.1
 jobs:
   build:
