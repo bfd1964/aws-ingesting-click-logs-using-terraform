@@ -1,0 +1,10 @@
+[
+  {
+    "projectGuid": "25570aaa-f119-49d1-b915-f294553d0d88",
+    "projectName": "AWS Click Logs Ingestion - Terraform Threat Model",
+    "modelType": "AWSCloudApplication",
+    "createdAt": "2026-09-30T00:00:00Z",
+    "lastUpdatedAt": "2026-09-30T00:00:00Z",
+    "version": "1.0"
+  }
+]
