@@ -4,7 +4,7 @@
     "projectName": "AWS Click Logs Ingestion - Terraform Threat Model",
     "modelType": "AWSCloudApplication",
     "createdAt": "2026-09-30T00:00:00Z",
-    "lastUpdatedAt": "2026-09-30T00:00:00Z",
-    "version": "1.0"
+    "lastUpdatedAt": "2026-09-30T15:54:58Z",
+    "version": "2.0"
   }
 ]
