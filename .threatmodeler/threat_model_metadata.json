@@ -1,0 +1,10 @@
+[
+  {
+    "projectGuid": "630c6e4d-cd32-4a3e-8d7e-c35be6e109cd",
+    "projectName": "AWS Click Log Ingestion - Terraform",
+    "modelType": "AWSCloudApplication",
+    "createdAt": "2026-09-30T00:00:00Z",
+    "lastUpdatedAt": "2026-09-30T00:00:00Z",
+    "version": "1.0"
+  }
+]
