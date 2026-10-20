@@ -1,0 +1,605 @@
+<mxfile host="app.diagrams.net" type="device" version="24.7.17">
+  <diagram id="page-1" name="1 &#183; Data Flow &amp; Trust Boundaries">
+    <mxGraphModel dx="1422" dy="800" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="n101" value="Click-Log Ingestion Pipeline — Data Flow &amp;amp; Trust Boundaries" style="text;html=1;align=left;verticalAlign=middle;fontSize=22;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="40" y="24" width="1500" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="n102" value="aws-ingesting-click-logs-using-terraform @ 88fb8b6 &amp;#183; STRIDE threat model v1.0 &amp;#183; red dashed = trust boundary &amp;#183; red notes = Critical, orange = High" style="text;html=1;align=left;verticalAlign=top;fontSize=11;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="40" y="60" width="1500" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="n103" value="TB-1 &amp;#183; INTERNET — UNTRUSTED" style="rounded=0;html=1;dashed=1;dashPattern=6 6;strokeWidth=2;strokeColor=#CC0000;fillColor=#FFF5F5;opacity=60;verticalAlign=top;align=left;spacingLeft=10;spacingTop=4;fontSize=11;fontStyle=1;fontColor=#CC0000;" vertex="1" parent="1">
+          <mxGeometry x="40" y="170" width="250" height="500" as="geometry" />
+        </mxCell>
+        <mxCell id="n104" value="Web application&lt;br&gt;(ORDERAPP / BILLAPP)" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=11;fontStyle=1;strokeColor=#1F6FBF;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="110" y="230" width="60" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="n105" value="Anonymous attacker" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=11;fontStyle=1;strokeColor=#CC0000;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="110" y="420" width="60" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="n106" value="&lt;b&gt;S-2 (Critical)&lt;/b&gt; &amp;#8212; the shared token is published verbatim in README.md, so &amp;#8220;attacker&amp;#8221; and &amp;#8220;web app&amp;#8221; are the same trust level in practice.&lt;br&gt;&lt;br&gt;&lt;b&gt;S-3 (High)&lt;/b&gt; token is embeddable in browser JS." style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#B85450;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=7;spacingRight=6;spacingTop=4;fontSize=10;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="55" y="540" width="220" height="115" as="geometry" />
+        </mxCell>
+        <mxCell id="n107" value="AWS Cloud &amp;#183; us-east-1 (single account)" style="sketch=0;outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=14;fontStyle=1;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_aws_cloud_alt;strokeColor=#232F3E;fillColor=none;verticalAlign=top;align=left;spacingLeft=34;fontColor=#232F3E;dashed=0;" vertex="1" parent="1">
+          <mxGeometry x="330" y="120" width="1310" height="790" as="geometry" />
+        </mxCell>
+        <mxCell id="n108" value="TB-2 / TB-3 &amp;#183; API GATEWAY EDGE" style="rounded=0;html=1;dashed=1;dashPattern=8 8;strokeWidth=2;strokeColor=#CC0000;fillColor=none;verticalAlign=top;align=left;spacingLeft=10;spacingTop=4;fontSize=11;fontStyle=1;fontColor=#CC0000;" vertex="1" parent="1">
+          <mxGeometry x="370" y="170" width="330" height="500" as="geometry" />
+        </mxCell>
+        <mxCell id="n109" value="Amazon API Gateway&lt;br&gt;POST /dev/clicklogger" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientDirection=north;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=1;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.api_gateway;gradientColor=#FF4F8B;fillColor=#E7157B;" vertex="1" parent="1">
+          <mxGeometry x="430" y="210" width="78" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="n110" value="&lt;b&gt;I-2 (High)&lt;/b&gt; data_trace_enabled = true &amp;#8594; full bodies + headers to logs&lt;br&gt;&lt;b&gt;I-7 (High)&lt;/b&gt; ACAO &amp;#8216;*&amp;#8217; / Allow-Methods &amp;#8216;*&amp;#8217;&lt;br&gt;&lt;b&gt;D-4 (High)&lt;/b&gt; no WAF, API key or usage plan &amp;#8212; one global 100/50 throttle&lt;br&gt;&lt;b&gt;R-3 (Med)&lt;/b&gt; no access logging &amp;#183; &lt;b&gt;D-8 (Med)&lt;/b&gt; region-global account setting" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=7;spacingRight=6;spacingTop=4;fontSize=10;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="378" y="328" width="314" height="92" as="geometry" />
+        </mxCell>
+        <mxCell id="n111" value="Lambda Authorizer&lt;br&gt;APIGatewayAuthorizerHandler" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientDirection=north;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=1;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.lambda;gradientColor=#F78E04;fillColor=#D05C17;" vertex="1" parent="1">
+          <mxGeometry x="430" y="448" width="78" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="n112" value="&lt;b&gt;E-1 (Critical)&lt;/b&gt; returns getAllowAllPolicy() &amp;#8594; ALL methods on ALL resources of the stage&lt;br&gt;&lt;b&gt;I-1 (Critical)&lt;/b&gt; prints the Authorization token to CloudWatch&lt;br&gt;&lt;b&gt;S-1 (Critical)&lt;/b&gt; static token in a plaintext env var, no expiry or rotation&lt;br&gt;&lt;b&gt;S-5 (Med)&lt;/b&gt; principalId hard-coded &amp;#8220;xxxx&amp;#8221; &amp;#183; &lt;b&gt;E-2 (Med)&lt;/b&gt; 300s default cache&lt;br&gt;&lt;b&gt;D-5 (Med)&lt;/b&gt; NPE if AUTH_TOKENS unset &amp;#183; &lt;b&gt;E-10 (Low)&lt;/b&gt; non-constant-time compare" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#B85450;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=7;spacingRight=6;spacingTop=4;fontSize=10;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="378" y="566" width="314" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="n113" value="TB-5 &amp;#183; LAMBDA COMPUTE (one shared IAM role)" style="rounded=0;html=1;dashed=1;dashPattern=8 8;strokeWidth=2;strokeColor=#CC0000;fillColor=none;verticalAlign=top;align=left;spacingLeft=10;spacingTop=4;fontSize=11;fontStyle=1;fontColor=#CC0000;" vertex="1" parent="1">
+          <mxGeometry x="740" y="170" width="330" height="500" as="geometry" />
+        </mxCell>
+        <mxCell id="n114" value="clicklogger-lambda&lt;br&gt;ClickLoggerHandler" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientDirection=north;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=1;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.lambda;gradientColor=#F78E04;fillColor=#D05C17;" vertex="1" parent="1">
+          <mxGeometry x="800" y="210" width="78" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="n115" value="&lt;b&gt;I-10 (High)&lt;/b&gt; always answers 200 OK &amp;#8212; Firehose failures invisible to the caller&lt;br&gt;&lt;b&gt;S-4 (High)&lt;/b&gt; trusts client-supplied callerid / user / clientip&lt;br&gt;&lt;b&gt;D-2 (High)&lt;/b&gt; 2048 MB / 300 s per invocation &amp;#183; &lt;b&gt;T-6 (Med)&lt;/b&gt; log injection" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=7;spacingRight=6;spacingTop=4;fontSize=10;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="748" y="328" width="314" height="92" as="geometry" />
+        </mxCell>
+        <mxCell id="n116" value="clicklogger-lambda-&lt;br&gt;stream-consumer" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientDirection=north;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=1;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.lambda;gradientColor=#F78E04;fillColor=#D05C17;" vertex="1" parent="1">
+          <mxGeometry x="800" y="448" width="78" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="n117" value="&lt;b&gt;T-4 (High)&lt;/b&gt; marks every record Result.Ok even when validation failed&lt;br&gt;&lt;b&gt;T-5 (High)&lt;/b&gt; swallows JsonSyntaxException and drops the recordId &amp;#8594; batch loss&lt;br&gt;&lt;b&gt;T-1 (High)&lt;/b&gt; PutItem with no ConditionExpression &amp;#8594; silent overwrite&lt;br&gt;&lt;b&gt;E-3 (High)&lt;/b&gt; shares its role with the authorizer &amp;#183; &lt;b&gt;R-5 (Med)&lt;/b&gt; mm/dd format bug" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=7;spacingRight=6;spacingTop=4;fontSize=10;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="748" y="566" width="314" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="n118" value="&lt;b&gt;Shared across all three functions &amp;#8212; E-3 / E-4 / E-7 / E-8 (High):&lt;/b&gt; one IAM role for authorizer + ingest + transform; firehose:* and dynamodb:Scan/ListTables granted but unused; runtime = java8 (EOL); AWS SDK v1 1.11.774 and junit at compile scope." style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=7;spacingRight=6;spacingTop=4;fontSize=10;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="740" y="676" width="330" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="n119" value="Kinesis Data Firehose&lt;br&gt;JSON &amp;#8594; Parquet" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientDirection=north;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=1;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.kinesis_data_firehose;gradientColor=#945DF2;fillColor=#5A30B5;" vertex="1" parent="1">
+          <mxGeometry x="1140" y="210" width="78" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="n120" value="&lt;b&gt;T-3 (Critical)&lt;/b&gt;&lt;br&gt;delivery role holds s3:*, glue:*, lambda:*, logs:* on Resource &amp;#8220;*&amp;#8221;&lt;br&gt;&lt;b&gt;T-8 (Med)&lt;/b&gt; processor pinned to :$LATEST&lt;br&gt;&lt;b&gt;I-5 (Med)&lt;/b&gt; no KMS key, UNCOMPRESSED" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#B85450;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=7;spacingRight=6;spacingTop=4;fontSize=10;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="1082" y="328" width="196" height="108" as="geometry" />
+        </mxCell>
+        <mxCell id="n121" value="TB-6 &amp;#183; DATA AT REST" style="rounded=0;html=1;dashed=1;dashPattern=8 8;strokeWidth=2;strokeColor=#CC0000;fillColor=none;verticalAlign=top;align=left;spacingLeft=10;spacingTop=4;fontSize=11;fontStyle=1;fontColor=#CC0000;" vertex="1" parent="1">
+          <mxGeometry x="1320" y="170" width="290" height="660" as="geometry" />
+        </mxCell>
+        <mxCell id="n122" value="AWS Glue Data Catalog&lt;br&gt;clickloggerdatabase" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientDirection=north;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=1;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.glue;gradientColor=#945DF2;fillColor=#5A30B5;" vertex="1" parent="1">
+          <mxGeometry x="1426" y="206" width="78" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="n123" value="&lt;b&gt;T-9 (Med)&lt;/b&gt; location is an S3 &lt;i&gt;ARN&lt;/i&gt;, not s3:// URI&lt;br&gt;&lt;b&gt;T-10 (Low)&lt;/b&gt; JsonSerDe declared, Parquet written" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D6B656;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=7;spacingRight=6;spacingTop=4;fontSize=10;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="1334" y="322" width="262" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="n124" value="Amazon S3&lt;br&gt;firehose delivery bucket" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientDirection=north;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=1;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.s3;gradientColor=#60A337;fillColor=#277116;" vertex="1" parent="1">
+          <mxGeometry x="1426" y="400" width="78" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="n125" value="&lt;b&gt;I-3 (High)&lt;/b&gt; no encryption config, no public-access block, no TLS-only policy, no versioning or access logging&lt;br&gt;&lt;b&gt;I-8 (High)&lt;/b&gt; no lifecycle rule &amp;#8212; PII kept forever" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=7;spacingRight=6;spacingTop=4;fontSize=10;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="1334" y="516" width="262" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="n126" value="Amazon DynamoDB&lt;br&gt;clickloggertable" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientDirection=north;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=1;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.dynamodb;gradientColor=#4D72F3;fillColor=#3334B9;" vertex="1" parent="1">
+          <mxGeometry x="1426" y="618" width="78" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="n127" value="&lt;b&gt;I-4 (High)&lt;/b&gt; no CMK, no PITR, no deletion protection&lt;br&gt;&lt;b&gt;T-1 (High)&lt;/b&gt; overwritable by key &amp;#183; &lt;b&gt;D-3 (High)&lt;/b&gt; fixed 5 RCU / 5 WCU, no autoscaling, no DLQ" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=7;spacingRight=6;spacingTop=4;fontSize=10;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="1334" y="734" width="262" height="76" as="geometry" />
+        </mxCell>
+        <mxCell id="n128" value="Amazon CloudWatch Logs" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientDirection=north;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=11;fontStyle=1;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.cloudwatch_2;gradientColor=#F54749;fillColor=#C7131F;" vertex="1" parent="1">
+          <mxGeometry x="600" y="760" width="78" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="n129" value="&lt;b&gt;I-1 + E-6 (Critical chain)&lt;/b&gt; the authorizer writes the token here in cleartext, while the API Gateway role holds logs:GetLogEvents / FilterLogEvents on Resource &amp;#8220;*&amp;#8221; &amp;#8212; a log read yields the credential. &lt;b&gt;R-2 (Med)&lt;/b&gt; retention is only 3&amp;#8211;7 days." style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#B85450;strokeWidth=1.5;align=left;verticalAlign=top;spacingLeft=7;spacingRight=6;spacingTop=4;fontSize=10;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="330" y="852" width="560" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="e130" value="① HTTPS POST + Authorization header" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#232F3E;fontSize=10;fontStyle=1;fontColor=#232F3E;labelBackgroundColor=#FFFFFF;endArrow=blockThin;endFill=1;" edge="1" parent="1" source="n104" target="n109">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e131" value="⚠ same path, token from README" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#CC0000;dashed=1;fontSize=10;fontStyle=1;fontColor=#CC0000;labelBackgroundColor=#FFFFFF;endArrow=blockThin;endFill=1;" edge="1" parent="1" source="n105" target="n109">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e132" value="② TOKEN authorizer invoke" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#232F3E;fontSize=10;fontStyle=1;fontColor=#232F3E;labelBackgroundColor=#FFFFFF;endArrow=blockThin;endFill=1;" edge="1" parent="1" source="n109" target="n111">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e133" value="③ allow-ALL policy, principal “xxxx”" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#232F3E;fontSize=10;fontStyle=1;fontColor=#232F3E;labelBackgroundColor=#FFFFFF;endArrow=blockThin;endFill=1;" edge="1" parent="1" source="n111" target="n109">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e134" value="④ AWS integration" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#232F3E;fontSize=10;fontStyle=1;fontColor=#232F3E;labelBackgroundColor=#FFFFFF;endArrow=blockThin;endFill=1;" edge="1" parent="1" source="n109" target="n114">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e135" value="⑤ PutRecord (JSON)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#232F3E;fontSize=10;fontStyle=1;fontColor=#232F3E;labelBackgroundColor=#FFFFFF;endArrow=blockThin;endFill=1;" edge="1" parent="1" source="n114" target="n119">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e136" value="⑥ transform invoke" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#232F3E;fontSize=10;fontStyle=1;fontColor=#232F3E;labelBackgroundColor=#FFFFFF;endArrow=blockThin;endFill=1;" edge="1" parent="1" source="n119" target="n116">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e137" value="⑦ PutItem (unconditional)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#232F3E;fontSize=10;fontStyle=1;fontColor=#232F3E;labelBackgroundColor=#FFFFFF;endArrow=blockThin;endFill=1;" edge="1" parent="1" source="n116" target="n126">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e138" value="⑧ records Result=Ok" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#232F3E;fontSize=10;fontStyle=1;fontColor=#232F3E;labelBackgroundColor=#FFFFFF;endArrow=blockThin;endFill=1;" edge="1" parent="1" source="n116" target="n119">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e139" value="⑨ schema lookup" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#232F3E;fontSize=10;fontStyle=1;fontColor=#232F3E;labelBackgroundColor=#FFFFFF;endArrow=blockThin;endFill=1;" edge="1" parent="1" source="n119" target="n122">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e140" value="⑩ Parquet write (unencrypted)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#232F3E;fontSize=10;fontStyle=1;fontColor=#232F3E;labelBackgroundColor=#FFFFFF;endArrow=blockThin;endFill=1;" edge="1" parent="1" source="n119" target="n124">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e141" value="⚠ token in cleartext" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=1.5;strokeColor=#9A9A9A;dashed=1;fontSize=10;fontColor=#8A3030;labelBackgroundColor=#FFFFFF;endArrow=open;endFill=0;" edge="1" parent="1" source="n111" target="n128">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e142" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=1.5;strokeColor=#9A9A9A;dashed=1;fontSize=10;fontColor=#8A3030;labelBackgroundColor=#FFFFFF;endArrow=open;endFill=0;" edge="1" parent="1" source="n114" target="n128">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e143" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=1.5;strokeColor=#9A9A9A;dashed=1;fontSize=10;fontColor=#8A3030;labelBackgroundColor=#FFFFFF;endArrow=open;endFill=0;" edge="1" parent="1" source="n116" target="n128">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n144" value="&lt;b&gt;LEGEND&lt;/b&gt;&lt;br&gt;&lt;br&gt;&amp;#9644; red dashed box &amp;#8212; trust boundary&lt;br&gt;&amp;#8594; solid arrow &amp;#8212; data flow (numbered)&lt;br&gt;&amp;#8594; red dashed &amp;#8212; attacker-reachable path&lt;br&gt;&amp;#8594; grey dashed &amp;#8212; log write&lt;br&gt;&lt;br&gt;&lt;b&gt;Finding note colours&lt;/b&gt;&lt;br&gt;&amp;#9632; Critical &amp;#160;&amp;#9632; High &amp;#160;&amp;#9632; Medium &amp;#160;&amp;#9632; Low&lt;br&gt;&lt;br&gt;Not shown: &lt;b&gt;I-6 (Critical)&lt;/b&gt; AUTH_TOKENS and whole-resource outputs land in plaintext Terraform state; &lt;b&gt;E-11 (High)&lt;/b&gt; apply runs on developer credentials with no policy-as-code gate." style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#232F3E;align=left;verticalAlign=top;spacingLeft=8;spacingTop=5;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="40" y="690" width="250" height="220" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="page-2" name="2 &#183; STRIDE per Element">
+    <mxGraphModel dx="1422" dy="800" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="n145" value="STRIDE per Element" style="text;html=1;align=left;verticalAlign=middle;fontSize=22;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="60" y="24" width="1400" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="n146" value="Each cell lists the threat IDs from docs/THREAT_MODEL.md; the cell is coloured by the highest severity it contains." style="text;html=1;align=left;verticalAlign=top;fontSize=11;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="60" y="60" width="1400" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="n147" value="Element" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#232F3E;strokeColor=#232F3E;fontColor=#FFFFFF;fontSize=12;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="60" y="110" width="230" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="n148" value="Spoofing" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#232F3E;strokeColor=#232F3E;fontColor=#FFFFFF;fontSize=12;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="290" y="110" width="196" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="n149" value="Tampering" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#232F3E;strokeColor=#232F3E;fontColor=#FFFFFF;fontSize=12;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="486" y="110" width="196" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="n150" value="Repudiation" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#232F3E;strokeColor=#232F3E;fontColor=#FFFFFF;fontSize=12;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="682" y="110" width="196" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="n151" value="Info Disclosure" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#232F3E;strokeColor=#232F3E;fontColor=#FFFFFF;fontSize=12;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="878" y="110" width="196" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="n152" value="Denial of Service" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#232F3E;strokeColor=#232F3E;fontColor=#FFFFFF;fontSize=12;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="1074" y="110" width="196" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="n153" value="Elev. of Privilege" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#232F3E;strokeColor=#232F3E;fontColor=#FFFFFF;fontSize=12;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="1270" y="110" width="196" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="n154" value="Internet &amp;#8594; API GW&lt;br&gt;(TB-1 flow)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E8EDF3;strokeColor=#232F3E;fontColor=#232F3E;fontSize=11;fontStyle=1;align=left;verticalAlign=middle;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="60" y="154" width="230" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n155" value="S-1, S-2, S-3" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#B85450;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="290" y="154" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n156" value="T-2" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="486" y="154" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n157" value="R-1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="682" y="154" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n158" value="I-7" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="878" y="154" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n159" value="D-4" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="1074" y="154" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n160" value="—" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#B3B3B3;fontSize=11;fontStyle=0;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="1270" y="154" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n161" value="Amazon API Gateway" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E8EDF3;strokeColor=#232F3E;fontColor=#232F3E;fontSize=11;fontStyle=1;align=left;verticalAlign=middle;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="60" y="226" width="230" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n162" value="S-4" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="290" y="226" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n163" value="—" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#B3B3B3;fontSize=11;fontStyle=0;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="486" y="226" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n164" value="R-3" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D6B656;fontSize=11;fontStyle=0;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="682" y="226" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n165" value="I-2, I-7" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="878" y="226" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n166" value="D-4, D-8" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="1074" y="226" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n167" value="E-2" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D6B656;fontSize=11;fontStyle=0;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="1270" y="226" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n168" value="Lambda Authorizer" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E8EDF3;strokeColor=#232F3E;fontColor=#232F3E;fontSize=11;fontStyle=1;align=left;verticalAlign=middle;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="60" y="298" width="230" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n169" value="S-1, S-2, S-5" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#B85450;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="290" y="298" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n170" value="—" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#B3B3B3;fontSize=11;fontStyle=0;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="486" y="298" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n171" value="R-1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="682" y="298" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n172" value="I-1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#B85450;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="878" y="298" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n173" value="D-5, D-6" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D6B656;fontSize=11;fontStyle=0;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="1074" y="298" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n174" value="E-1, E-10" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#B85450;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="1270" y="298" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n175" value="ClickLogger Lambda" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E8EDF3;strokeColor=#232F3E;fontColor=#232F3E;fontSize=11;fontStyle=1;align=left;verticalAlign=middle;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="60" y="370" width="230" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n176" value="S-4" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="290" y="370" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n177" value="T-6" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D6B656;fontSize=11;fontStyle=0;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="486" y="370" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n178" value="R-5" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D6B656;fontSize=11;fontStyle=0;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="682" y="370" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n179" value="I-10" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="878" y="370" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n180" value="D-1, D-2, D-7" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="1074" y="370" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n181" value="E-3, E-4, E-7, E-8" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="1270" y="370" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n182" value="Stream Consumer Lambda" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E8EDF3;strokeColor=#232F3E;fontColor=#232F3E;fontSize=11;fontStyle=1;align=left;verticalAlign=middle;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="60" y="442" width="230" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n183" value="—" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#B3B3B3;fontSize=11;fontStyle=0;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="290" y="442" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n184" value="T-1, T-4, T-5, T-6" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="486" y="442" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n185" value="R-5" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D6B656;fontSize=11;fontStyle=0;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="682" y="442" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n186" value="I-10" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="878" y="442" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n187" value="D-1, D-3, D-7" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="1074" y="442" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n188" value="E-3, E-4, E-7, E-8" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="1270" y="442" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n189" value="Kinesis Data Firehose" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E8EDF3;strokeColor=#232F3E;fontColor=#232F3E;fontSize=11;fontStyle=1;align=left;verticalAlign=middle;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="60" y="514" width="230" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n190" value="—" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#B3B3B3;fontSize=11;fontStyle=0;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="290" y="514" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n191" value="T-3, T-8" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#B85450;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="486" y="514" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n192" value="—" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#B3B3B3;fontSize=11;fontStyle=0;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="682" y="514" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n193" value="I-5" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D6B656;fontSize=11;fontStyle=0;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="878" y="514" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n194" value="D-2" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="1074" y="514" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n195" value="E-4" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="1270" y="514" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n196" value="S3 bucket + Glue Catalog" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E8EDF3;strokeColor=#232F3E;fontColor=#232F3E;fontSize=11;fontStyle=1;align=left;verticalAlign=middle;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="60" y="586" width="230" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n197" value="—" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#B3B3B3;fontSize=11;fontStyle=0;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="290" y="586" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n198" value="T-3, T-7, T-9, T-10" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#B85450;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="486" y="586" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n199" value="R-4" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D6B656;fontSize=11;fontStyle=0;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="682" y="586" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n200" value="I-3, I-8" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="878" y="586" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n201" value="D-2" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="1074" y="586" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n202" value="E-4" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="1270" y="586" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n203" value="DynamoDB table + GSI" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E8EDF3;strokeColor=#232F3E;fontColor=#232F3E;fontSize=11;fontStyle=1;align=left;verticalAlign=middle;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="60" y="658" width="230" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n204" value="S-4" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="290" y="658" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n205" value="T-1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="486" y="658" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n206" value="R-4, R-5" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D6B656;fontSize=11;fontStyle=0;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="682" y="658" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n207" value="I-4, I-8, I-9" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="878" y="658" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n208" value="D-3" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="1074" y="658" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n209" value="E-4" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="1270" y="658" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n210" value="CloudWatch Logs" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E8EDF3;strokeColor=#232F3E;fontColor=#232F3E;fontSize=11;fontStyle=1;align=left;verticalAlign=middle;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="60" y="730" width="230" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n211" value="—" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#B3B3B3;fontSize=11;fontStyle=0;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="290" y="730" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n212" value="T-6" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D6B656;fontSize=11;fontStyle=0;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="486" y="730" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n213" value="R-2, R-3" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D6B656;fontSize=11;fontStyle=0;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="682" y="730" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n214" value="I-1, I-2" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#B85450;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="878" y="730" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n215" value="—" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#B3B3B3;fontSize=11;fontStyle=0;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="1074" y="730" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n216" value="E-5, E-6" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="1270" y="730" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n217" value="IAM roles / Terraform IaC" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E8EDF3;strokeColor=#232F3E;fontColor=#232F3E;fontSize=11;fontStyle=1;align=left;verticalAlign=middle;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="60" y="802" width="230" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n218" value="—" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#B3B3B3;fontSize=11;fontStyle=0;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="290" y="802" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n219" value="T-3" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#B85450;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="486" y="802" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n220" value="R-4" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D6B656;fontSize=11;fontStyle=0;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="682" y="802" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n221" value="I-6" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#B85450;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="878" y="802" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n222" value="D-9" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D6B656;fontSize=11;fontStyle=0;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="1074" y="802" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n223" value="E-3, E-5, E-6, E-9, E-11" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="1270" y="802" width="196" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="n224" value="&lt;b&gt;Severity key&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="60" y="898" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="n225" value="Critical (6)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#B85450;fontSize=11;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="210" y="898" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="n226" value="High (23)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=11;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="400" y="898" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="n227" value="Medium (17)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D6B656;fontSize=11;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="590" y="898" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="n228" value="Low (4)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#82B366;fontSize=11;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="780" y="898" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="n229" value="no threat identified" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#B3B3B3;fontSize=11;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="970" y="898" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="n230" value="50 findings total &amp;#183; Spoofing 5 &amp;#183; Tampering 10 &amp;#183; Repudiation 5 &amp;#183; Information Disclosure 10 &amp;#183; Denial of Service 9 &amp;#183; Elevation of Privilege 11" style="text;html=1;align=left;verticalAlign=top;fontSize=11;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="60" y="942" width="1400" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="page-3" name="3 &#183; Attack Chains">
+    <mxGraphModel dx="1422" dy="800" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="n231" value="Attack Chains" style="text;html=1;align=left;verticalAlign=middle;fontSize=22;fontStyle=1;fontColor=#232F3E;" vertex="1" parent="1">
+          <mxGeometry x="60" y="24" width="1400" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="n232" value="How individual findings combine into realised loss. Each chain is drawn left to right; the final box is the impact." style="text;html=1;align=left;verticalAlign=top;fontSize=11;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="60" y="60" width="1400" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="n233" value="&lt;b&gt;AS-1&lt;/b&gt;&lt;br&gt;Credential harvest&lt;br&gt;&amp;#8594; full stage access&lt;br&gt;&lt;font color=&quot;#777777&quot;&gt;Critical&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#B85450;strokeWidth=2;fontSize=12;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="60" y="120" width="180" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="n234" value="Assume the clicklogger-api-gateway-cloudwatch-global-role" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=10;align=left;verticalAlign=middle;spacingLeft=8;spacingRight=8;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="260" y="120" width="232" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="n235" value="&lt;b&gt;E-6&lt;/b&gt; role holds logs:FilterLogEvents on Resource &amp;#8220;*&amp;#8221;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=10;align=left;verticalAlign=middle;spacingLeft=8;spacingRight=8;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="518" y="120" width="232" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="e236" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#B85450;endArrow=blockThin;endFill=1;" edge="1" parent="1" source="n234" target="n235">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n237" value="&lt;b&gt;I-1&lt;/b&gt; read &amp;#8220;received token - ALLOW=ORDERAPP&amp;#8221; from the authorizer log group" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=10;align=left;verticalAlign=middle;spacingLeft=8;spacingRight=8;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="776" y="120" width="232" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="e238" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#B85450;endArrow=blockThin;endFill=1;" edge="1" parent="1" source="n235" target="n237">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n239" value="&lt;b&gt;E-1&lt;/b&gt; replay the token; authorizer returns an allow-ALL policy" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=10;align=left;verticalAlign=middle;spacingLeft=8;spacingRight=8;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="1034" y="120" width="232" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="e240" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#B85450;endArrow=blockThin;endFill=1;" edge="1" parent="1" source="n237" target="n239">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n241" value="Access to every method and every resource on the stage &amp;#8212; including routes added later. No exploit needed, only a log read." style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#B85450;strokeWidth=2;fontSize=10;align=left;verticalAlign=middle;spacingLeft=8;spacingRight=8;fontStyle=1;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="1292" y="120" width="300" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="e242" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#B85450;endArrow=blockThin;endFill=1;" edge="1" parent="1" source="n239" target="n241">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n243" value="&lt;b&gt;AS-2&lt;/b&gt;&lt;br&gt;Public token&lt;br&gt;&amp;#8594; analytics destruction&lt;br&gt;&lt;font color=&quot;#777777&quot;&gt;Critical&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#B85450;strokeWidth=2;fontSize=12;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="60" y="270" width="180" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="n244" value="&lt;b&gt;S-2&lt;/b&gt; read the token straight from the public README" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=10;align=left;verticalAlign=middle;spacingLeft=8;spacingRight=8;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="260" y="270" width="232" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="n245" value="Observe or guess a requestid + contextid pair" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=10;align=left;verticalAlign=middle;spacingLeft=8;spacingRight=8;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="518" y="270" width="232" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="e246" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#B85450;endArrow=blockThin;endFill=1;" edge="1" parent="1" source="n244" target="n245">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n247" value="POST /clicklogger with the matching keys" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=10;align=left;verticalAlign=middle;spacingLeft=8;spacingRight=8;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="776" y="270" width="232" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="e248" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#B85450;endArrow=blockThin;endFill=1;" edge="1" parent="1" source="n245" target="n247">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n249" value="&lt;b&gt;T-1&lt;/b&gt; PutItem has no ConditionExpression &amp;#8212; the genuine item is overwritten" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=10;align=left;verticalAlign=middle;spacingLeft=8;spacingRight=8;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="1034" y="270" width="232" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="e250" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#B85450;endArrow=blockThin;endFill=1;" edge="1" parent="1" source="n247" target="n249">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n251" value="Silent destruction of real records. S3 Parquet history and DynamoDB diverge; the gap surfaces only when reports disagree." style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#B85450;strokeWidth=2;fontSize=10;align=left;verticalAlign=middle;spacingLeft=8;spacingRight=8;fontStyle=1;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="1292" y="270" width="300" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="e252" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#B85450;endArrow=blockThin;endFill=1;" edge="1" parent="1" source="n249" target="n251">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n253" value="&lt;b&gt;AS-3&lt;/b&gt;&lt;br&gt;Batch poisoning&lt;br&gt;&amp;#8594; collateral data loss&lt;br&gt;&lt;font color=&quot;#777777&quot;&gt;High&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;strokeWidth=2;fontSize=12;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="60" y="420" width="180" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="n254" value="Submit one payload that is malformed at the Firehose boundary" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=10;align=left;verticalAlign=middle;spacingLeft=8;spacingRight=8;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="260" y="420" width="232" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="n255" value="&lt;b&gt;T-5&lt;/b&gt; JsonSyntaxException is caught and the recordId is dropped" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=10;align=left;verticalAlign=middle;spacingLeft=8;spacingRight=8;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="518" y="420" width="232" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="e256" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#B85450;endArrow=blockThin;endFill=1;" edge="1" parent="1" source="n254" target="n255">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n257" value="The response record set no longer matches Firehose&amp;#8217;s input set" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=10;align=left;verticalAlign=middle;spacingLeft=8;spacingRight=8;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="776" y="420" width="232" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="e258" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#B85450;endArrow=blockThin;endFill=1;" edge="1" parent="1" source="n255" target="n257">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n259" value="Firehose fails the whole batch" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=10;align=left;verticalAlign=middle;spacingLeft=8;spacingRight=8;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="1034" y="420" width="232" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="e260" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#B85450;endArrow=blockThin;endFill=1;" edge="1" parent="1" source="n257" target="n259">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n261" value="Legitimate records batched alongside the malformed one are destroyed. Repeat at intervals for sustained, hard-to-attribute loss." style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;strokeWidth=2;fontSize=10;align=left;verticalAlign=middle;spacingLeft=8;spacingRight=8;fontStyle=1;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="1292" y="420" width="300" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="e262" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#B85450;endArrow=blockThin;endFill=1;" edge="1" parent="1" source="n259" target="n261">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n263" value="&lt;b&gt;AS-4&lt;/b&gt;&lt;br&gt;Cost and availability&lt;br&gt;attack&lt;br&gt;&lt;font color=&quot;#777777&quot;&gt;High&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;strokeWidth=2;fontSize=12;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="60" y="570" width="180" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="n264" value="Flood the endpoint using the published token" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=10;align=left;verticalAlign=middle;spacingLeft=8;spacingRight=8;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="260" y="570" width="232" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="n265" value="&lt;b&gt;D-2&lt;/b&gt; three 2048 MB / 300 s functions driven at the 100 rps stage ceiling" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=10;align=left;verticalAlign=middle;spacingLeft=8;spacingRight=8;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="518" y="570" width="232" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="e266" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#B85450;endArrow=blockThin;endFill=1;" edge="1" parent="1" source="n264" target="n265">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n267" value="&lt;b&gt;D-1&lt;/b&gt; the account&amp;#8217;s unreserved concurrency pool is exhausted" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=10;align=left;verticalAlign=middle;spacingLeft=8;spacingRight=8;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="776" y="570" width="232" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="e268" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#B85450;endArrow=blockThin;endFill=1;" edge="1" parent="1" source="n265" target="n267">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n269" value="&lt;b&gt;D-3 / D-7&lt;/b&gt; 5 WCU throttles DynamoDB writes, and there is no DLQ" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=10;align=left;verticalAlign=middle;spacingLeft=8;spacingRight=8;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="1034" y="570" width="232" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="e270" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#B85450;endArrow=blockThin;endFill=1;" edge="1" parent="1" source="n267" target="n269">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n271" value="Account-wide Lambda starvation, an unbounded bill, and silently dropped writes. Cost is bounded only by the attacker&amp;#8217;s patience." style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;strokeWidth=2;fontSize=10;align=left;verticalAlign=middle;spacingLeft=8;spacingRight=8;fontStyle=1;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="1292" y="570" width="300" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="e272" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#B85450;endArrow=blockThin;endFill=1;" edge="1" parent="1" source="n269" target="n271">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n273" value="&lt;b&gt;AS-5&lt;/b&gt;&lt;br&gt;Data plane&lt;br&gt;&amp;#8594; account compromise&lt;br&gt;&lt;font color=&quot;#777777&quot;&gt;Critical&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#B85450;strokeWidth=2;fontSize=12;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="60" y="720" width="180" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="n274" value="Reach the Firehose delivery role (misconfiguration or confused deputy)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=10;align=left;verticalAlign=middle;spacingLeft=8;spacingRight=8;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="260" y="720" width="232" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="n275" value="&lt;b&gt;T-3&lt;/b&gt; inline policy grants s3:*, glue:*, lambda:*, logs:* on Resource &amp;#8220;*&amp;#8221;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=10;align=left;verticalAlign=middle;spacingLeft=8;spacingRight=8;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="518" y="720" width="232" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="e276" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#B85450;endArrow=blockThin;endFill=1;" edge="1" parent="1" source="n274" target="n275">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n277" value="Read, write and delete objects in every bucket in the account" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=10;align=left;verticalAlign=middle;spacingLeft=8;spacingRight=8;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="776" y="720" width="232" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="e278" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#B85450;endArrow=blockThin;endFill=1;" edge="1" parent="1" source="n275" target="n277">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n279" value="Rewrite the schema of every table in the Glue Data Catalog" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=10;align=left;verticalAlign=middle;spacingLeft=8;spacingRight=8;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="1034" y="720" width="232" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="e280" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#B85450;endArrow=blockThin;endFill=1;" edge="1" parent="1" source="n277" target="n279">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n281" value="The blast radius of a click-log pipeline becomes the entire account&amp;#8217;s data estate." style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#B85450;strokeWidth=2;fontSize=10;align=left;verticalAlign=middle;spacingLeft=8;spacingRight=8;fontStyle=1;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="1292" y="720" width="300" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="e282" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#B85450;endArrow=blockThin;endFill=1;" edge="1" parent="1" source="n279" target="n281">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n283" value="&lt;b&gt;AS-6&lt;/b&gt;&lt;br&gt;Cross-origin&lt;br&gt;browser abuse&lt;br&gt;&lt;font color=&quot;#777777&quot;&gt;High&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;strokeWidth=2;fontSize=12;align=center;verticalAlign=middle;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="60" y="870" width="180" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="n284" value="&lt;b&gt;S-3&lt;/b&gt; the token ships inside front-end JavaScript" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=10;align=left;verticalAlign=middle;spacingLeft=8;spacingRight=8;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="260" y="870" width="232" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="n285" value="&lt;b&gt;I-7&lt;/b&gt; ACAO &amp;#8216;*&amp;#8217; and Allow-Headers includes Authorization" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=10;align=left;verticalAlign=middle;spacingLeft=8;spacingRight=8;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="518" y="870" width="232" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="e286" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#B85450;endArrow=blockThin;endFill=1;" edge="1" parent="1" source="n284" target="n285">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n287" value="Any website scripts authenticated ingest calls from a visitor&amp;#8217;s browser" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=10;align=left;verticalAlign=middle;spacingLeft=8;spacingRight=8;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="776" y="870" width="232" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="e288" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#B85450;endArrow=blockThin;endFill=1;" edge="1" parent="1" source="n285" target="n287">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n289" value="&lt;b&gt;S-4&lt;/b&gt; callerid, user and clientip are all self-asserted" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;fontSize=10;align=left;verticalAlign=middle;spacingLeft=8;spacingRight=8;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="1034" y="870" width="232" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="e290" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#B85450;endArrow=blockThin;endFill=1;" edge="1" parent="1" source="n287" target="n289">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n291" value="Fabricated events attributed to the victim&amp;#8217;s IP address and to whichever calling application the attacker chooses." style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;strokeWidth=2;fontSize=10;align=left;verticalAlign=middle;spacingLeft=8;spacingRight=8;fontStyle=1;fontColor=#1A1A1A;" vertex="1" parent="1">
+          <mxGeometry x="1292" y="870" width="300" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="e292" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeWidth=2;strokeColor=#B85450;endArrow=blockThin;endFill=1;" edge="1" parent="1" source="n289" target="n291">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n293" value="Remediation priority: close &lt;b&gt;E-1&lt;/b&gt; (least-privilege authorizer policy), &lt;b&gt;I-1&lt;/b&gt; (stop logging the token), &lt;b&gt;S-1/S-2&lt;/b&gt; (replace the static token with IAM SigV4 or a JWT authorizer), &lt;b&gt;T-3&lt;/b&gt; (scope the Firehose role) and &lt;b&gt;I-6&lt;/b&gt; (secrets out of Terraform state) first &amp;#8212; those five break five of the six chains above." style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D6B656;align=left;verticalAlign=middle;spacingLeft=10;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="60" y="1030" width="1500" height="40" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
